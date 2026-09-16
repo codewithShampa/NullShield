@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <linearGradient id="fav-shield" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#00F5D4" />
+      <stop offset="50%" stopColor="#3B82F6" />
+      <stop offset="100%" stopColor="#6366F1" />
+    </linearGradient>
+    <linearGradient id="fav-core" x1="16" y1="14" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#FFFFFF" />
+      <stop offset="100%" stopColor="#00F5D4" />
+    </linearGradient>
+    <radialGradient id="fav-bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stopColor="#0D121F" />
+      <stop offset="100%" stopColor="#07090E" />
+    </radialGradient>
+  </defs>
+
+  <rect width="48" height="48" rx="12" fill="url(#fav-bg)" />
+  <path d="M24 6L40 13V24C40 32.5 33.5 39.5 24 42C14.5 39.5 8 32.5 8 24V13L24 6Z" fill="#00F5D4" fill-opacity="0.12" stroke="url(#fav-shield)" stroke-width="2" stroke-linejoin="round" />
+  <circle cx="24" cy="24" r="7" fill="#07090E" stroke="url(#fav-shield)" stroke-width="1.8" />
+  <circle cx="24" cy="22" r="2.2" fill="url(#fav-core)" />
+  <path d="M22.5 23.5L21.5 28.5H26.5L25.5 23.5H22.5Z" fill="url(#fav-core)" />
+</svg>
