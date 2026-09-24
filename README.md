@@ -5,7 +5,7 @@
 [![Midnight Network](https://img.shields.io/badge/Network-Midnight%20Preprod-00E5FF?style=for-the-badge&logo=polkadot&logoColor=black)](https://midnight.network)
 [![Language](https://img.shields.io/badge/Language-Compact%20v0.31.0-FF6B00?style=for-the-badge)](https://midnight.network)
 [![Framework](https://img.shields.io/badge/Frontend-React%20%7C%20Vite%20%7C%20Vanilla%20CSS-A855F7?style=for-the-badge&logo=react)](https://vite.dev)
-[![CI/CD Status](https://img.shields.io/badge/CI%2FCD-Passing%20(100%25)-C084FC?style=for-the-badge&logo=githubactions&logoColor=black)](https://github.com/codePaji/nullshield/actions)
+[![CI/CD Status](https://img.shields.io/badge/CI%2FCD-Passing%20(100%25)-C084FC?style=for-the-badge&logo=githubactions&logoColor=black)](https://github.com/codewithShampa/NullShield/actions)
 [![Tested With](https://img.shields.io/badge/Tests-32%20Passing%20(Unit%20%2B%20Devnet)-10B981?style=for-the-badge&logo=vitest)](https://vitest.dev)
 [![Hackathon Level](https://img.shields.io/badge/Progression-Levels%201--4%20Complete-8B5CF6?style=for-the-badge)](#hackathon-progression-levels-14)
 [![Theme Support](https://img.shields.io/badge/Theme-Day%20%2F%20Night%20Toggle-F43F5E?style=for-the-badge)](#project-showcase--visual-proofs)
@@ -30,11 +30,11 @@ In traditional digital governance, transparency and privacy are fundamentally in
 
 | Deliverable | Details & URLs |
 | :--- | :--- |
-| **Deployed Contract (Preprod)** | [`39767f264df7b2da4ea9ce24b3900f148517c564ec9efbffecad33edcd33332f`](https://explorer.1am.xyz/contract/39767f264df7b2da4ea9ce24b3900f148517c564ec9efbffecad33edcd33332f?network=preprod) |
-| **1AM Explorer Contract Link** | [View Contract Page on 1AM Explorer](https://explorer.1am.xyz/contract/39767f264df7b2da4ea9ce24b3900f148517c564ec9efbffecad33edcd33332f?network=preprod) |
-| **Deployment Transaction Hash** | [`fb3d589a96887201ef318c4128a0a534ae582b2e26ae8051381b70f4e805ab23`](https://explorer.1am.xyz/tx/fb3d589a96887201ef318c4128a0a534ae582b2e26ae8051381b70f4e805ab23?network=preprod) |
+| **Live Web App (Netlify)** | [https://nullshieldzk.netlify.app/](https://nullshieldzk.netlify.app/) |
+| **Deployed Contract (Preprod)** | [`b2aaa714ef5bf682770508545c23948a586e2929709ab440fe976abf9e25eca8`](https://explorer.1am.xyz/contract/b2aaa714ef5bf682770508545c23948a586e2929709ab440fe976abf9e25eca8?network=preprod) |
+| **1AM Explorer Contract Link** | [View Contract Page on 1AM Explorer](https://explorer.1am.xyz/contract/b2aaa714ef5bf682770508545c23948a586e2929709ab440fe976abf9e25eca8?network=preprod) |
 | **Security & Privacy Audit** | [Read Full Audit Report (AUDIT.md)](AUDIT.md) |
-| **GitHub Repository** | [https://github.com/codePaji/nullshield](https://github.com/codePaji/nullshield) |
+| **GitHub Repository** | [https://github.com/codewithShampa/NullShield](https://github.com/codewithShampa/NullShield) |
 
 ---
 
@@ -187,8 +187,7 @@ This project satisfies all criteria across the official Midnight "New Moon to Fu
 - [x] **Compact Toolchain:** Installed `compact` compiler (v0.31.0) and successfully compiled `voting.compact`.
 - [x] **Artifact Generation:** Prover keys (`cast_vote.prover`), verifier keys (`cast_vote.verifier`), and intermediate representation (`cast_vote.zkir`, `cast_vote.bzkir`) generated in `contracts/managed/voting/`.
 - [x] **Contract Deployed:** Deployed to Midnight Preprod network with verifiable contract address:  
-  [`39767f264df7b2da4ea9ce24b3900f148517c564ec9efbffecad33edcd33332f`](https://explorer.1am.xyz/contract/39767f264df7b2da4ea9ce24b3900f148517c564ec9efbffecad33edcd33332f?network=preprod)  
-  *(Deployment Tx: [`fb3d589a...`](https://explorer.1am.xyz/tx/fb3d589a96887201ef318c4128a0a534ae582b2e26ae8051381b70f4e805ab23?network=preprod))*
+  [`b2aaa714ef5bf682770508545c23948a586e2929709ab440fe976abf9e25eca8`](https://explorer.1am.xyz/contract/b2aaa714ef5bf682770508545c23948a586e2929709ab440fe976abf9e25eca8?network=preprod)
 - [x] **Product Idea Seeded:** Private Voting dApp (transparent tallies with zero-knowledge ballot secrecy).
 - [x] **Git History:** Meaningful modular commits.
 
@@ -196,7 +195,7 @@ This project satisfies all criteria across the official Midnight "New Moon to Fu
 - [x] **DApp Connector Integration:** Connected 1AM browser extension wallet and Lace wallet using `@midnight-ntwrk/dapp-connector-api`.
 - [x] **Circuit Execution from Frontend:** In-browser zero-knowledge transaction generation calling `cast_vote` and `close_poll` circuits.
 - [x] **Observable Privacy Behavior:** Voters prove vote validity without revealing choice; nullifier commitments prevent double voting without revealing identity.
-- [x] **Verifiable Preprod Contract:** Registered on-chain and visible via [1AM Contract Explorer](https://explorer.1am.xyz/contract/39767f264df7b2da4ea9ce24b3900f148517c564ec9efbffecad33edcd33332f?network=preprod).
+- [x] **Verifiable Preprod Contract:** Registered on-chain and visible via [1AM Contract Explorer](https://explorer.1am.xyz/contract/b2aaa714ef5bf682770508545c23948a586e2929709ab440fe976abf9e25eca8?network=preprod).
 - [x] **Day/Night Theme Toggle:** Seamless switching between deep cosmic dark mode and clean high-contrast light mode.
 
 ### Level 3: Production-Grade dApp (First Quarter)
@@ -226,8 +225,8 @@ This project satisfies all criteria across the official Midnight "New Moon to Fu
 ### 2. Installation
 Clone the repository and install dependencies:
 ```bash
-git clone https://github.com/codePaji/nullshield.git
-cd nullshield
+git clone https://github.com/codewithShampa/NullShield.git
+cd NullShield
 yarn install
 ```
 
