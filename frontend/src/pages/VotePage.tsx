@@ -78,13 +78,15 @@ export default function VotePage() {
 
       setProvingStep(2); // Generating ZK constraint proof
 
+      const privateStateId = 'VoterState_' + voterSecretHex.slice(0, 8);
+      await session.providers.privateStateProvider.set(privateStateId, { voterSecret });
       const txData = await createUnprovenCallTx(session.providers as any, {
         compiledContract: BrowserCompiledVotingContract,
         contractAddress: config.contractAddress,
         circuitId: 'cast_vote',
         args: [BigInt(choice)],
         privateStateId: 'VoterState_' + voterSecretHex.slice(0, 8), 
-        initialPrivateState: { voterSecret },
+        
         signingKey: sampleSigningKey(),
       });
 
