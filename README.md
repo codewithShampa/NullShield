@@ -32,6 +32,7 @@ In traditional digital governance, transparency and privacy are fundamentally in
 | :--- | :--- |
 | **Live Web App (Netlify)** | [https://nullshieldzk.netlify.app/](https://nullshieldzk.netlify.app/) |
 | **Demo Video** | [Watch Demo Video on Google Drive](https://drive.google.com/file/d/1OCFLrQybuDnIifYLN2owjiSAGkSogq_m/view?usp=sharing) |
+| **X (Twitter) Announcement** | [View Launch Post on X](https://x.com/NullShieldZK/status/2103014757611839977?s=20) |
 | **Deployed Contract (Preprod)** | [`b2aaa714ef5bf682770508545c23948a586e2929709ab440fe976abf9e25eca8`](https://explorer.1am.xyz/contract/b2aaa714ef5bf682770508545c23948a586e2929709ab440fe976abf9e25eca8?network=preprod) |
 | **1AM Explorer Contract Link** | [View Contract Page on 1AM Explorer](https://explorer.1am.xyz/contract/b2aaa714ef5bf682770508545c23948a586e2929709ab440fe976abf9e25eca8?network=preprod) |
 | **Security & Privacy Audit** | [Read Full Audit Report (AUDIT.md)](AUDIT.md) |
