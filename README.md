@@ -31,6 +31,7 @@ In traditional digital governance, transparency and privacy are fundamentally in
 | Deliverable | Details & URLs |
 | :--- | :--- |
 | **Live Web App (Netlify)** | [https://nullshieldzk.netlify.app/](https://nullshieldzk.netlify.app/) |
+| **Demo Video** | [Watch Demo Video on Google Drive](https://drive.google.com/file/d/1OCFLrQybuDnIifYLN2owjiSAGkSogq_m/view?usp=sharing) |
 | **Deployed Contract (Preprod)** | [`b2aaa714ef5bf682770508545c23948a586e2929709ab440fe976abf9e25eca8`](https://explorer.1am.xyz/contract/b2aaa714ef5bf682770508545c23948a586e2929709ab440fe976abf9e25eca8?network=preprod) |
 | **1AM Explorer Contract Link** | [View Contract Page on 1AM Explorer](https://explorer.1am.xyz/contract/b2aaa714ef5bf682770508545c23948a586e2929709ab440fe976abf9e25eca8?network=preprod) |
 | **Security & Privacy Audit** | [Read Full Audit Report (AUDIT.md)](AUDIT.md) |
@@ -210,6 +211,35 @@ This project satisfies all criteria across the official Midnight "New Moon to Fu
 - [x] **Live MVP on Preprod:** Fully functional dApp operating on the Midnight Preprod network.
 - [x] **In-Browser Admin Portal:** Built-in contract deployer avoiding developer machine out-of-memory (OOM) crashes by delegating proof generation to connected 1AM wallet.
 - [x] **Comprehensive Documentation:** Full setup guide, master troubleshooting guide (`MIDNIGHT_MASTER_GUIDE.md`), and developer quickstart.
+
+---
+
+## Project Showcase & Visual Proofs
+
+NullShield features a premium, minimalist, and fully responsive user interface built with React, Vite, and custom CSS variables supporting a dynamic Day/Night theme toggle. 
+
+Below are screenshots of the NullShield dApp in action:
+
+<div align="center">
+  <img src="./ui/ui1.png" alt="NullShield Landing Page" width="800" style="border-radius: 8px; margin-bottom: 20px;">
+  <br>
+  <em>The sleek, minimalist pure black aesthetic of the NullShield dApp landing page.</em>
+  <br><br>
+  
+  <img src="./ui/ui2.png" alt="NullShield Voting Interface" width="800" style="border-radius: 8px; margin-bottom: 20px;">
+  <br>
+  <em>The secure voting booth where users generate Zero-Knowledge proofs locally within their browser.</em>
+  <br><br>
+  
+  <img src="./ui/ui3.png" alt="NullShield Audit Page" width="800" style="border-radius: 8px; margin-bottom: 20px;">
+  <br>
+  <em>The Audit Trail interface polling real-time contract state from the Midnight v4 Indexer.</em>
+  <br><br>
+  
+  <img src="./ui/ui4.png" alt="NullShield Admin Dashboard" width="800" style="border-radius: 8px; margin-bottom: 20px;">
+  <br>
+  <em>The Governance Admin portal where new cryptographic polls can be deployed to the Midnight Preprod Network.</em>
+</div>
 
 ---
 
