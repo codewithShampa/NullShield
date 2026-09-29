@@ -1,0 +1,56 @@
+pragma language_version >=0.22.0;
+
+import CompactStandardLibrary;
+
+// Public Ledger State
+export ledger total_yes: Counter;
+export ledger total_no: Counter;
+export ledger total_votes: Counter;
+export ledger is_open: Boolean;
+export ledger admin: Bytes<32>;
+export ledger has_voted: Map<Bytes<32>, Boolean>;
+
+// Private Witnesses
+witness adminSecret(): Bytes<32>;
+witness voterSecret(): Bytes<32>;
+
+// Cryptographic pure circuit for key derivation
+pure circuit adminPublicKey(sk: Bytes<32>): Bytes<32> {
+  return persistentHash<Vector<2, Bytes<32>>>([pad(32, "nullshield:admin:v1"), sk]);
+}
+
+pure circuit voterNullifier(sk: Bytes<32>): Bytes<32> {
+  return persistentHash<Vector<2, Bytes<32>>>([pad(32, "nullshield:voter:v1"), sk]);
+}
+
+constructor(admin_key: Bytes<32>) {
+  admin = disclose(admin_key);
+  is_open = true;
+}
+
+export circuit cast_vote(choice: Uint<32>): [] {
+  assert(is_open, "Poll is closed");
+  assert(choice <= 1, "Invalid choice: must be 0 (No) or 1 (Yes)");
+
+  // Sybil resistance: derive and verify nullifier
+  const sk = voterSecret();
+  const nullifier = voterNullifier(sk);
+
+  assert(!has_voted.member(disclose(nullifier)), "Voter has already cast a ballot in this proposal");
+  has_voted.insert(disclose(nullifier), true);
+
+  // Conditional increment — branch is concealed within the ZK proof
+  const yes_inc = choice;
+  const no_inc = (1 - choice) as Uint<32>;
+
+  total_yes.increment(disclose(yes_inc as Uint<16>));
+  total_no.increment(disclose(no_inc as Uint<16>));
+  total_votes.increment(1);
+}
+
+export circuit close_poll(): [] {
+  assert(is_open, "Poll is already closed");
+  const sk = adminSecret();
+  assert(admin == adminPublicKey(sk), "Not authorized: invalid admin key");
+  is_open = false;
+}

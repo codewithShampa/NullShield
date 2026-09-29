@@ -5,7 +5,7 @@
 [![Midnight Network](https://img.shields.io/badge/Network-Midnight%20Preprod-00E5FF?style=for-the-badge&logo=polkadot&logoColor=black)](https://midnight.network)
 [![Language](https://img.shields.io/badge/Language-Compact%20v0.31.0-FF6B00?style=for-the-badge)](https://midnight.network)
 [![Framework](https://img.shields.io/badge/Frontend-React%20%7C%20Vite%20%7C%20Vanilla%20CSS-A855F7?style=for-the-badge&logo=react)](https://vite.dev)
-[![CI/CD Status](https://img.shields.io/badge/CI%2FCD-Passing%20(100%25)-C084FC?style=for-the-badge&logo=githubactions&logoColor=black)](https://github.com/codewithShampa/NullShield/actions)
+[![CI/CD Status](https://github.com/codewithShampa/NullShield/actions/workflows/ci.yaml/badge.svg)](https://github.com/codewithShampa/NullShield/actions)
 [![Tested With](https://img.shields.io/badge/Tests-32%20Passing%20(Unit%20%2B%20Devnet)-10B981?style=for-the-badge&logo=vitest)](https://vitest.dev)
 [![Hackathon Level](https://img.shields.io/badge/Progression-Levels%201--4%20Complete-8B5CF6?style=for-the-badge)](#hackathon-progression-levels-14)
 [![Theme Support](https://img.shields.io/badge/Theme-Day%20%2F%20Night%20Toggle-F43F5E?style=for-the-badge)](#project-showcase--visual-proofs)
@@ -30,6 +30,7 @@ In traditional digital governance, transparency and privacy are fundamentally in
 
 | Deliverable | Details & URLs |
 | :--- | :--- |
+| **Product Proposal** | [Read Full Proposal (PROPOSAL.md)](PROPOSAL.md) |
 | **Live Web App (Netlify)** | [https://nullshieldzk.netlify.app/](https://nullshieldzk.netlify.app/) |
 | **Demo Video** | [Watch Demo Video on Google Drive](https://drive.google.com/file/d/1OCFLrQybuDnIifYLN2owjiSAGkSogq_m/view?usp=sharing) |
 | **X (Twitter) Announcement** | [View Launch Post on X](https://x.com/NullShieldZK/status/2103014757611839977?s=20) |
@@ -190,7 +191,7 @@ This project satisfies all criteria across the official Midnight "New Moon to Fu
 - [x] **Artifact Generation:** Prover keys (`cast_vote.prover`), verifier keys (`cast_vote.verifier`), and intermediate representation (`cast_vote.zkir`, `cast_vote.bzkir`) generated in `contracts/managed/voting/`.
 - [x] **Contract Deployed:** Deployed to Midnight Preprod network with verifiable contract address:  
   [`b2aaa714ef5bf682770508545c23948a586e2929709ab440fe976abf9e25eca8`](https://explorer.1am.xyz/contract/b2aaa714ef5bf682770508545c23948a586e2929709ab440fe976abf9e25eca8?network=preprod)
-- [x] **Product Idea Seeded:** Private Voting dApp (transparent tallies with zero-knowledge ballot secrecy).
+- [x] **Product Idea Seeded:** Private Voting dApp ([PROPOSAL.md](PROPOSAL.md) detailing product definition, Midnight architecture, data model, and Mainnet scope).
 - [x] **Git History:** Meaningful modular commits.
 
 ### Level 2: Frontend Integration (Waxing Crescent)
