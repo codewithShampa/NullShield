@@ -14,9 +14,9 @@
 
 ## Executive Summary
 
-**NullShield** is a decentralized, zero-knowledge confidential ballot and governance protocol built natively on the **Midnight Network** using the **Compact** smart contract language and TypeScript SDK.
+Contemporary on-chain governance and decentralized voting mechanisms are inherently constrained by the transparency paradigm of distributed ledgers. Participants are compelled to broadcast their state transitions in plaintext to achieve verifiability, thereby relinquishing ballot secrecy. Conversely, off-chain or obfuscated voting models typically sacrifice cryptographic auditability, introducing centralization risks and undermining Sybil resistance.
 
-In traditional digital governance, transparency and privacy are fundamentally in conflict: either voters disclose their decisions to prove their vote was counted, or ballot anonymity obscures individual auditability. NullShield eliminates this tradeoff using Zero-Knowledge proofs:
+**NullShield** resolves this architectural limitation by introducing a decentralized, zero-knowledge confidential ballot protocol built natively on the **Midnight Network** using the **Compact** smart contract language and TypeScript SDK. Utilizing client-side proof generation, the protocol permits users to cryptographically attest to their voting eligibility and ballot execution without exposing the underlying plaintext choice to validators, contract state, or third-party observers:
 
 - **Mathematical Anonymity:** Voters generate local zero-knowledge proofs directly inside their browser wallet (1AM / Lace).
 - **Public Auditability:** The Midnight ledger records verified increments to public counters (`total_yes`, `total_no`, `total_votes`) without revealing which branch or option an individual voter selected.

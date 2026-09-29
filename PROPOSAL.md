@@ -4,55 +4,56 @@
 
 ---
 
-## 1. Product and User
+## 1. Problem Statement
 
-### Problem Statement
-In traditional digital governance—ranging from Web3 DAOs and shareholder resolutions to civic referendums and committee ballots—transparency and voter privacy are fundamentally at war:
-- **On Transparent Blockchains (Ethereum, Solana):** Every ballot transaction discloses the voter's address, choice, and timestamp on a public ledger. This creates acute vulnerabilities to vote buying, voter intimidation, bribery, retaliation, and herd mentality (the bandwagon effect).
-- **In Centralized Systems (Snapshot, Web2 Polling Platforms):** Systems rely on centralized databases or servers to collect votes. Administrators, hosting providers, or compromised servers can manipulate tallies, leak voter records, or log IP-to-identity mappings, requiring blind trust from participants.
+Contemporary on-chain governance and decentralized voting mechanisms are inherently constrained by the transparency paradigm of distributed ledgers. Participants are compelled to broadcast their state transitions in plaintext to achieve verifiability, thereby relinquishing ballot secrecy. Conversely, off-chain or obfuscated voting models typically sacrifice cryptographic auditability, introducing centralization risks and undermining Sybil resistance. This dichotomy impedes the adoption of trustless governance by entities requiring strict compliance with data privacy frameworks.
 
-### The NullShield Product
-**NullShield** is a zero-knowledge confidential ballot and governance protocol built natively on the **Midnight Network**. It leverages the **Compact** smart contract language and zero-knowledge zk-SNARKs (Groth16) to provide mathematical ballot privacy with public ledger auditability:
-1. **Ballot Secrecy:** A voter's selection (Yes/No) is evaluated as a private witness inside an in-browser zero-knowledge circuit. The raw choice never leaves the voter's local device and is never broadcast over the network.
-2. **Public Auditability:** The Midnight ledger records verified increments to public counters (`total_yes`, `total_no`, `total_votes`), allowing anyone, anywhere, to verify the final tally and turnout in real time without trusting an intermediary.
-3. **Sybil Resistance via Cryptographic Nullifiers:** Double voting is prevented through deterministic, domain-separated nullifiers (`nullshield:voter:v1`). The nullifier registers participation on-chain without revealing the voter's secret or linking back to their public wallet address.
-4. **Verifiable Proof Receipts:** Voters export a deterministic client-side cryptographic receipt with SHA-256 checksums to independently prove their participation to verifiers or communities.
-5. **Turnkey Governance Portal:** Includes an interactive web application with real-time Apollo GraphQL v4 Indexer sync, 1AM / Lace browser wallet support via `@midnight-ntwrk/dapp-connector-api`, and day/night adaptable ergonomics.
-
-### Target Users
-- **Decentralized Autonomous Organizations (DAOs):** Protocol treasuries, grant committees, and core governance councils requiring bribery-resistant, un-coerced voting on sensitive budget allocations or executive appointments.
-- **Enterprise & Shareholder Boards:** Corporations and consortiums conducting confidential executive elections, mergers and acquisitions evaluations, and board resolutions that require legally verifiable totals without exposing individual board members' votes.
-- **Civic Collectives & Unions:** Communities, research groups, and worker unions voting on policy reforms, petitions, or representative appointments where members must remain protected from workplace or political reprisal.
-- **Individual Voters & Delegates:** Privacy-conscious token holders who refuse to dox their convictions or net worth to the public blockchain when exercising their governance rights.
+**NullShield** resolves this architectural limitation by introducing a decentralized, zero-knowledge confidential ballot protocol. Utilizing client-side proof generation, the protocol permits users to cryptographically attest to their voting eligibility and ballot execution without exposing the underlying plaintext choice to validators, contract state, or third-party observers.
 
 ---
 
-## 2. Why Midnight Specifically
+## 2. Why Midnight?
 
-Conventional blockchain platforms and traditional web architectures cannot deliver confidential, verifiable governance:
+NullShield is explicitly engineered to interface with the **Midnight Network's** data-protection architecture and its native proving capabilities:
 
-1. **Native Dual-State Architecture (Public vs. Private):**
-   Transparent chains treat all execution inputs as public. Midnight's fundamental programming model separates state into:
-   - **Public Ledger State:** Open, immutable, and readable by indexers and blockchain explorers.
-   - **Private Witness State:** Bound strictly to local client memory, evaluated inside the ZK prover, and never transmitted over the wire.
-   NullShield leverages this dual-state model so that the counting logic is public and verifiable, while the voter's preference remains private.
-
-2. **Compact Smart Contract Language:**
-   Compact provides domain-specific language primitives designed specifically for zero-knowledge engineering:
-   - Native `witness` declarations for client inputs (`voterSecret`, `choice`, `adminSecret`).
-   - Explicit `disclose()` boundaries that alert the developer and prevent accidental information leaks.
-   - Pure circuits (`pure circuit`) for deterministic hash derivations evaluated directly in zero-knowledge constraints.
-   - Native ledger counters (`Counter`) and associative maps (`Map<Bytes<32>, Boolean>`) that guarantee atomic state updates on-chain.
-
-3. **Client-Side Proving via DApp Connector API:**
-   Midnight enables in-browser proof generation using WebAssembly and Web Workers through `@midnight-ntwrk/dapp-connector-api`. The voter connects their 1AM or Lace wallet, computes the Groth16 proof locally in sub-seconds, and submits only the zero-knowledge proof and public inputs to the Midnight node. No centralized proof server or untrusted backend ever sees the voter's entropy.
-
-4. **Domain-Separated Cryptographic Nullifiers:**
-   Midnight's built-in `persistentHash` and `pad` functions enable domain separation (`"nullshield:voter:v1"` vs `"nullshield:admin:v1"`). This ensures that nullifiers cannot be correlated across different protocols, different proposals, or administrative circuits, eliminating cross-contract linkage and tracking.
+- **Dual-State Architecture:** By implementing the Compact smart contract language, the protocol bifurcates application state into public ledger primitives (aggregate vote tallies) and private witness data (individual ballot selections).
+- **Client-Side Proving via 1AM / Lace:** The integration of the 1AM wallet facilitates localized, in-browser compilation of Zero-Knowledge proofs, ensuring that the voter's entropy and preimage data never transit the network layer.
+- **Robust Consensus Verification:** Midnight's validator consensus guarantees that these verifiable computation receipts are authenticated and recorded on-chain without decrypting or inferring the private inputs, achieving a mathematically sound, trustless execution environment.
+- **Domain-Separated Cryptographic Primitives:** Midnight's native `persistentHash` and `pad` primitives guarantee collision-resistant nullifiers that enforce strict one-person-one-vote mechanics without linking identities across proposals or external protocols.
 
 ---
 
-## 3. Data Model
+## 3. Target Users
+
+- **Tier 1 (Early Adopters):** Cryptographically-native Decentralized Autonomous Organizations (DAOs) and Web3 consortiums requiring trustless, on-chain governance frameworks that strictly preserve member anonymity and mitigate voter retaliation, bribery, and coercion.
+- **Tier 2 (Growth Phase):** Institutional governance boards and decentralized finance (DeFi) protocols seeking to offload the regulatory liability of processing plaintext PII and sensitive shareholder decisions to a verifiable Zero-Knowledge execution layer.
+- **Tier 3 (Mainnet Scale):** Federal regulatory bodies and large-scale geopolitical voting infrastructure demanding high-throughput, cryptographically auditable electoral systems compliant with stringent global data privacy heuristics.
+
+---
+
+## 4. Technical Architecture
+
+### Component Breakdown
+- **Frontend:** A reactive React 19 / Vite Single Page Application (SPA) interfacing with the Midnight DApp Connector API (`@midnight-ntwrk/dapp-connector-api`) and leveraging the 1AM browser extension for cryptographic signing, key derivation, and session restoration.
+- **Smart Contracts:** A Compact execution circuit ([`contracts/voting.compact`](contracts/voting.compact)) compiled down to WebAssembly (WASM) and Zero-Knowledge Intermediate Representation (ZKIR). It orchestrates a hybrid state model, managing public Patricia-Merkle trie state commitments (`total_yes`, `total_no`, `total_votes`, and a persistent Hash set for nullifiers) alongside isolated private execution contexts.
+- **Data Flow:**
+  1. The deploying authority initializes the contract state and public cryptographic parameters via the constructor circuit.
+  2. Upon ballot execution, the client provisions their local witness data (`choice`, `voterSecret`).
+  3. The connected wallet executes the localized ZK circuit, yielding a Groth16 zero-knowledge proof and a deterministic, collision-resistant nullifier.
+  4. This payload is submitted as an unproven ledger transaction, which is subsequently verified by Midnight consensus nodes and committed atomically to the blockchain ledger.
+  5. The frontend subscribes to real-time counter updates via the Midnight v4 Indexer Apollo GraphQL endpoint.
+
+---
+
+## 5. Complexity Evaluation
+
+- **Zero-Knowledge Privacy Boundaries:** Engineering strict execution boundaries between the public ledger state variables and the local unshielded witness environment, mitigating side-channel data leakage and ensuring state transitions are mathematically isolated from private inputs.
+- **Anonymous Sybil Resistance:** Designing and implementing non-interactive, collision-resistant cryptographic nullifiers derived from deterministic secret keys (`nullshield:voter:v1`). This prevents double-spending of governance rights while maintaining complete unlinkability to the voter's primary network address.
+- **State Synchronization and Error Handling:** Engineering resilient client-side state reconciliation algorithms via the Midnight Indexer GraphQL API, managing provider synchronization through the DApp Connector, and architecting robust exception handling for WASM runtime faults, proof-server timeouts, and offset indexing anomalies.
+
+---
+
+## 6. Data Model: Public Ledger vs. Private Witness vs. Selective Disclosure
 
 ### Public Ledger State (On-Chain)
 The public ledger state is globally visible, consensus-verified, and indexed by Midnight v4 GraphQL indexers:
@@ -125,45 +126,26 @@ In NullShield, every disclosure crossing the privacy boundary is tightly scoped:
 
 ---
 
-## 4. Scope and Feasibility to Mainnet
+## 7. Roadmap and Milestone Progression
 
-### Current MVP Status (Levels 1 to 4 Complete)
-NullShield has achieved and exceeded all requirements across Levels 1 through 4 of the Midnight builder milestone roadmap:
-- **Verified Compact Smart Contract:** Implemented in `contracts/voting.compact` and compiled using `compact` compiler v0.31.0, generating complete ZKIR circuits and proving/verifying keys in `contracts/managed/voting/`.
-- **Live Preprod Network Deployment:** Deployed to Midnight Preprod with verified on-chain address:
+### Level 4 (Production MVP and Initial Scale — Completed)
+- **Compact Smart Contract:** Transitioned the NullShield prototype into a robust production release ([`contracts/voting.compact`](contracts/voting.compact)) compiled with Compact compiler v0.31.0 and deployed to Midnight Preprod at verifiable contract address:  
   [`b2aaa714ef5bf682770508545c23948a586e2929709ab440fe976abf9e25eca8`](https://explorer.1am.xyz/contract/b2aaa714ef5bf682770508545c23948a586e2929709ab440fe976abf9e25eca8?network=preprod)
-- **Comprehensive Automated Test Suite (32 Tests):**
-  - 24 unit tests covering nullifier determinism, domain separation (`v1` vs `v2`, voter vs admin), state transitions, quorum math, and receipt verification (`yarn test:unit`).
-  - 8 end-to-end integration tests verifying contract deployment, double-vote rejection, and poll lifecycle against local devnet (`yarn test:local`).
-- **Production-Grade Frontend & Wallet Integration:** Responsive React 19 + TypeScript + Vite web app deployed on Netlify ([https://nullshieldzk.netlify.app/](https://nullshieldzk.netlify.app/)) with 1AM / Lace wallet injection, interactive ZK terminal, Day/Night theme toggling, and real-time Apollo GraphQL v4 indexer updates.
-- **Formal Audit Documentation:** Comprehensive security, privacy, and threat modeling documented in [`AUDIT.md`](AUDIT.md).
-- **Automated CI/CD Pipeline:** GitHub Actions workflow ([`.github/workflows/ci.yaml`](.github/workflows/ci.yaml)) testing contract compilation, unit test suites, and frontend bundling on every push.
+- **Frontend Architecture:** Integrated an advanced analytics dashboard querying the v4 Indexer, 1AM wallet connection, client-side proof generation, and cryptographic receipt export capabilities. Live deployment accessible at [https://nullshieldzk.netlify.app/](https://nullshieldzk.netlify.app/).
+- **Automated CI/CD Pipeline:** Constructed a comprehensive GitHub Actions CI/CD pipeline ([`.github/workflows/ci.yaml`](.github/workflows/ci.yaml)) verifying contract compilation (`yarn compile`), 24 unit tests (`yarn test:unit`), and frontend production bundling (`npm run build`). Exceeded 75 verified, modular commits.
 
-### Roadmap to Mainnet
+### Level 5 (Full Moon Submission)
+- **Empirical Protocol Validation & User Acquisition:** Transition from private iteration to public infrastructure deployment, acquiring 50 verifiable Preprod users comprising protocol administrators and voters.
+- **Telemetry & Feedback Integration:** Establish a structured telemetry and feedback loop to prioritize state machine optimizations, gas fee refinements, and UX enhancements.
+- **Documentation & Demonstration:** Continuously synchronize technical documentation with network updates. Deliver an end-to-end video demonstration illustrating the complete cryptographic lifecycle alongside a minimum of 20 verified commits.
 
-To progress from the current Preprod MVP to an enterprise-grade Mainnet deployment, the NullShield engineering roadmap encompasses the following phases:
-
-#### Phase 1: Factory Contract & Multi-Proposal Registry
-- Implement a `VotingFactory.compact` contract that allows DAOs and organizers to deploy new polls on demand with customized parameters (title, description hash, voting duration, quorum threshold, and voter eligibility commitments).
-- Maintain an on-chain registry of active and historical proposals accessible through standard Midnight indexers.
-
-#### Phase 2: Timelocked Tallying & Threshold Decryption
-- In the current MVP, running tallies increment live on the ledger. While vote choices remain private to each transaction, running tallies can introduce psychological bandwagoning.
-- For Mainnet, implement threshold encryption / timelock encryption (via verifiable secret sharing or Midnight timelock primitives) so that cumulative results remain sealed until the proposal deadline passes.
-
-#### Phase 3: Range-Proof Stake Weighting & Quadratic Voting
-- Extend the circuit to support token-weighted voting and quadratic voting without disclosing voter balances.
-- Use zero-knowledge range proofs to attest that a voter holds at least $N$ governance tokens on Midnight without broadcasting their exact balance or unshielded UTXO.
-
-#### Phase 4: Formal Security Audits & Proving Optimization
-- Engage third-party zero-knowledge cryptographic auditors to perform formal verification of the Compact circuits, constraint systems, and nullifier collision resistance.
-- Optimize ZK proving key sizes and memory footprints to facilitate mobile proving in iOS/Android browser environments.
-
-#### Phase 5: Production Node Infrastructure & Governance Tooling
-- Deploy redundant, geographically distributed Midnight observer nodes and Apollo GraphQL indexer clusters with automated failover.
-- Introduce snapshot export tools and signed cryptographic audit certificates allowing organizations to archive and verify finalized election results with zero external dependencies.
+### Level 6 (Supermoon Submission)
+- **Architectural Finalization & Hardening:** Finalize the protocol architecture based on aggregate behavioral heuristics and vulnerability assessments.
+- **Network Scaling:** Scale user acquisition to encompass 70 active Preprod participants executing verifiable on-chain state transitions.
+- **Enterprise Standards:** Finalize all architectural documentation, privacy boundary matrices, and cryptographic threat models ([`AUDIT.md`](AUDIT.md)) to enterprise standards.
+- **Conclusive Submission:** Deliver the finalized repository, documented iteration lifecycle, an optimized live deployment, a conclusive MVP demonstration, and a minimum of 30 semantic commits.
 
 ---
 
 ### Conclusion
-NullShield demonstrates that governance on public blockchains does not require sacrificing individual privacy. By leveraging Midnight's dual-state Compact architecture, NullShield delivers an auditable, Sybil-resistant, and mathematically confidential voting protocol ready for the future of decentralized governance.
+NullShield demonstrates that governance on public blockchains does not require sacrificing individual privacy. By leveraging Midnight's dual-state Compact architecture, NullShield delivers an auditable, Sybil-resistant, and mathematically confidential voting protocol ready for enterprise and decentralized adoption.
